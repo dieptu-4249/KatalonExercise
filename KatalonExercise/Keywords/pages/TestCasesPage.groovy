@@ -24,25 +24,11 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import common.BasePage
 import internal.GlobalVariable
 
-public class HomePage extends BasePage {
-	private By btnSignUpLogin = By.cssSelector("a[href='/login']");
-	private By testCasesButton = By.cssSelector("li a[href='/test_cases']")
-	private By slider = By.cssSelector("div[id='slider-carousel']")
-	HomePage open () {
-		goToUrl("http://automationexercise.com")
+public class TestCasesPage extends BasePage {
+	private By testCaseTitle = By.cssSelector("h2.title")
+	TestCasesPage verifyTestCasesPageVisible () {
+		verifyVisible(testCaseTitle)
 		return this
 	}
-	HomePage verifyHomePageVisible () {
-		verifyVisible(slider)
-		return this
-	}
-	LoginPage clickOnSignUpLogin() {
-		click(btnSignUpLogin)
-		return new LoginPage()
-	}
-	TestCasesPage clickOnTestCases() {
-		click(testCasesButton)
-		return new TestCasesPage()
-	}
-	
+
 }

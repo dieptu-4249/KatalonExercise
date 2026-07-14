@@ -16,9 +16,10 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable
 import pages.HomePage
-import pages.LoginPage
+import pages.TestCasesPage
 
 import org.openqa.selenium.Keys as Keys
+
 //1. Launch browser
 WebUI.openBrowser("")
 HomePage homePage = new HomePage()
@@ -26,16 +27,10 @@ HomePage homePage = new HomePage()
 homePage.open()
 //3. Verify that home page is visible successfully
 homePage.verifyHomePageVisible()
-//4. Click on 'Signup / Login' button
-LoginPage loginPage = homePage.clickOnSignUpLogin()
-//5. Verify 'Login to your account' is visible
-loginPage.verifyLoginTitle("Login to your account")
-//6. Enter incorrect email address and password
-loginPage.setEmailInput("dieptu@gmail.com")
-loginPage.setPasswordInput("1234")
-//7. Click 'login' button
-loginPage.clickLoginButton()
-//8. Verify error 'Your email or password is incorrect!' is visible
-loginPage.verifyErrorMessage("Your email or password is incorrect!")
+//4. Click on 'Test Cases' button
+TestCasesPage testCasesPage = homePage.clickOnTestCases()
+//5. Verify user is navigated to test cases page successfully
+testCasesPage.verifyTestCasesPageVisible()
 WebUI.closeBrowser()
+
 
