@@ -15,29 +15,27 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable
+import pages.CheckoutPage
 import pages.HomePage
-import pages.ProductPage
 
 import org.openqa.selenium.Keys as Keys
 
+
 //1. Launch browser
 WebUI.openBrowser("")
-HomePage homePage = new HomePage()
 //2. Navigate to url 'http://automationexercise.com'
+HomePage homePage = new HomePage()
 homePage.open()
-//3. Verify that home page is visible successfully
-homePage.verifyHomePageVisible()
-//4. Click on 'Products' button
-ProductPage productPage = homePage.clickOnProduct()
-productPage.verifyAllProductsPageVisible("ALL PRODUCTS")
-//6. Enter product name in search input and click search button
-String searchKeyword = "little"
-// in-case: keyword = 's' -> blue top failed case
-productPage.setSearchInput(searchKeyword)
-productPage.clickOnSearchSubmitButton()
-//7. Verify 'SEARCHED PRODUCTS' is visible
-productPage.verifySearchedProductsPageVisible("SEARCHED PRODUCTS")
-//8. Verify all the products related to search are visible
-productPage.verifySearchedProducts(searchKeyword)
+//3. Scroll to bottom of page
+homePage.scrollToRecommendedTitle()
+//4. Verify 'RECOMMENDED ITEMS' are visible
+homePage.verifyRecommendedTitleVisible()
+//5. Click on 'Add To Cart' on Recommended product
+homePage.clickOnRandomRecommendedItem()
+//6. Click on 'View Cart' button
+CheckoutPage checkoutPage = homePage.clickOnViewCart()
+//7. Verify that product is displayed in cart page
+String selectedPName = homePage.getSelectedRecommendedProductName()
+checkoutPage.verifySelectedProductInCart(selectedPName)
 WebUI.closeBrowser()
 

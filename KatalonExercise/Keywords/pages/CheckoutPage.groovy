@@ -7,7 +7,6 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 
 import org.openqa.selenium.By
-import org.openqa.selenium.WebElement
 
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.checkpoint.Checkpoint
@@ -24,31 +23,14 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import common.BasePage
 import internal.GlobalVariable
 
-public class LoginPage extends BasePage {
-	private By loginTitle = By.cssSelector("div.login-form h2")
-	private By emailInput = By.cssSelector("input[data-qa='login-email']")
-	private By passwordInput = By.cssSelector("input[data-qa='login-password']")
-	private By loginBtn = By.cssSelector("button[data-qa='login-button']")
-	private By errorMessage = By.cssSelector("form[action='/login'] p")
-	LoginPage verifyLoginTitle (String expectedTitle) {
-		waitVisible(loginTitle)
-		assert getText(loginTitle).equals(expectedTitle)
+public class CheckoutPage extends BasePage {
+	private By productNames = By.cssSelector("tr td.cart_description a")
+	CheckoutPage verifySelectedProductInCart (String selectedProductName) {
+		verifyVisible(productNames)
+		def productNamesInCart = finds(productNames).collect { it.getText() }
+		assert productNamesInCart.contains(selectedProductName)
 		return this
+		
 	}
-	LoginPage setEmailInput(String email) {
-		setText(emailInput, email)
-		return this
-	}
-	LoginPage setPasswordInput (String password) {
-		setText(passwordInput, password)
-		return this
-	}
-	LoginPage clickLoginButton () {
-		click(loginBtn)
-		return this
-	}
-	LoginPage verifyErrorMessage(String expectedMessage) {
-		assert getText(errorMessage).equals(expectedMessage)
-		return this
-	}
+
 }

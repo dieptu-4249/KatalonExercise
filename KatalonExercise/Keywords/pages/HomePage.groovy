@@ -29,6 +29,14 @@ public class HomePage extends BasePage {
 	private By testCasesButton = By.cssSelector("li a[href='/test_cases']")
 	private By slider = By.cssSelector("div[id='slider-carousel']")
 	private By productButton = By.cssSelector("li a[href='/products']")
+	private By recommendedTitle = By.cssSelector(".recommended_items h2.title")
+	private By recommendedProducts = By.cssSelector(".recommended_items .item.active .productinfo.text-center")
+	private By viewCartButton = By.cssSelector(".modal-body a")
+	private String selectedRecommendedProductName = ""
+	
+	String getSelectedRecommendedProductName () {
+		return this.selectedRecommendedProductName
+	}
 	HomePage open () {
 		goToUrl("http://automationexercise.com")
 		return this
@@ -37,6 +45,27 @@ public class HomePage extends BasePage {
 		verifyVisible(slider)
 		return this
 	}
+	HomePage scrollToRecommendedTitle() {
+		scrollToElement(recommendedTitle)
+		return this
+	}
+	HomePage verifyRecommendedTitleVisible() {
+		verifyVisible(recommendedTitle)
+		return this
+	}
+	HomePage clickOnRandomRecommendedItem() {
+		def products = finds(recommendedProducts)
+		def randomIndex = new Random().nextInt(products.size())
+		def selectedProduct = products[randomIndex]
+		selectedRecommendedProductName = selectedProduct.findElement(By.tagName("p")).getText()
+		selectedProduct.findElement(By.cssSelector("a.add-to-cart")).click()				
+		return this
+	}
+	CheckoutPage clickOnViewCart() {
+		click(viewCartButton)
+		return new CheckoutPage()
+	}
+
 	LoginPage clickOnSignUpLogin() {
 		click(btnSignUpLogin)
 		return new LoginPage()

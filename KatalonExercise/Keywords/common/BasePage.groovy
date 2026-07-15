@@ -39,6 +39,9 @@ public class BasePage {
 	WebElement find(By locator) {
 		return driver.findElement(locator)
 	}
+	List<WebElement> finds (By locator){
+		return driver.findElements(locator)
+	}
 
 	void waitVisible (By locator) {
 		new WebDriverWait(driver, Duration.ofSeconds(DEFAULT_TIMEOUT))
@@ -63,30 +66,37 @@ public class BasePage {
 			return false
 		}
 	}
-	
+
 	void setText(By locator, String text) {
-	
-			waitVisible(locator)
-	
-			WebElement element = find(locator)
-	
-			element.clear()
-			element.sendKeys(text)
-		}
-	
-		String getText(By locator) {
-	
-			waitVisible(locator)
-	
-			return find(locator).getText()
-		}
-	
+
+		waitVisible(locator)
+
+		WebElement element = find(locator)
+
+		element.clear()
+		element.sendKeys(text)
+	}
+
+	String getText(By locator) {
+
+		waitVisible(locator)
+
+		return find(locator).getText()
+	}
+
 
 	void verifyVisible(By locator) {
 		assert isDisplayed(locator)
 	}
-	
+
 	void verifyTitle (String expectedTitle) {
 		assert driver.getTitle().equals(expectedTitle)
+	}
+	void scrollToElement(By locator) {
+
+		WebUI.executeJavaScript(
+				"arguments[0].scrollIntoView({block:'center'});",
+				[find(locator)]
+				)
 	}
 }
