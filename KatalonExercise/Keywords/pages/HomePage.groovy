@@ -31,9 +31,13 @@ public class HomePage extends BasePage {
 	private By productButton = By.cssSelector("li a[href='/products']")
 	private By recommendedTitle = By.cssSelector(".recommended_items h2.title")
 	private By recommendedProducts = By.cssSelector(".recommended_items .item.active .productinfo.text-center")
+	private By featureProducts = By.cssSelector(".features_items .productinfo.text-center")
 	private By viewCartButton = By.cssSelector(".modal-body a")
+	private By cartButton = By.cssSelector("li a[href='/view_cart']")
+	private By continueShoppingButton = By.cssSelector("div.modal-confirm button.close-modal")
+	private By loggedInfo = By.xpath("//li/a[contains(.,'Logged in as')]")
 	private String selectedRecommendedProductName = ""
-	
+
 	String getSelectedRecommendedProductName () {
 		return this.selectedRecommendedProductName
 	}
@@ -58,12 +62,32 @@ public class HomePage extends BasePage {
 		def randomIndex = new Random().nextInt(products.size())
 		def selectedProduct = products[randomIndex]
 		selectedRecommendedProductName = selectedProduct.findElement(By.tagName("p")).getText()
-		selectedProduct.findElement(By.cssSelector("a.add-to-cart")).click()				
+		selectedProduct.findElement(By.cssSelector("a.add-to-cart")).click()
 		return this
 	}
-	CheckoutPage clickOnViewCart() {
+	HomePage clickOnRandomFeatureItems(int numberOfItem) {
+		def products = finds(featureProducts)
+		for(int i=0; i<numberOfItem;i++) {
+			def randomIndex = new Random().nextInt(products.size())
+			def selectedProduct = products[randomIndex]
+			selectedProduct.findElement(By.cssSelector("a.add-to-cart")).click()
+			clickOnContinueShopping()
+		}
+		return this;
+	}
+	HomePage clickOnContinueShopping() {
+		click(continueShoppingButton)
+		return this
+	}
+	CartPage clickOnCartButton () {
+		click(cartButton)
+		return new CartPage()
+	}
+
+
+	CartPage clickOnViewCart() {
 		click(viewCartButton)
-		return new CheckoutPage()
+		return new CartPage()
 	}
 
 	LoginPage clickOnSignUpLogin() {
@@ -78,5 +102,9 @@ public class HomePage extends BasePage {
 		println(driver.getCurrentUrl())
 		click(productButton)
 		return new ProductPage()
+	}
+	HomePage verifyLoggedInfoVisible () {
+		verifyVisible(loggedInfo)
+		return this
 	}
 }

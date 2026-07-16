@@ -23,27 +23,33 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import common.BasePage
 import internal.GlobalVariable
 
-public class CheckoutPage extends BasePage {
-	private By addressDetailsTitle = By.xpath("//div/h2[contains(.,'Address Details')]") 
-	private By reviewOrderTitle = By.xpath("//div/h2[contains(.,'Review Your Order')]")
-	private By descriptionOrder = By.cssSelector("textarea[name='message']")
-	private By placeOrderButton = By.cssSelector("a[href='/payment']")
-	CheckoutPage verifyAddressDetailsTitleVisible() {
-		verifyVisible(addressDetailsTitle)
+public class CartPage extends BasePage {
+	private By productNames = By.cssSelector("tr td.cart_description a")
+	private By breadcrumbShoppingCart = By.cssSelector("div.breadcrumbs li.active")
+	private By checkoutButton = By.cssSelector("a.check_out")
+	private By registerLoginButtonInModal = By.cssSelector("div.modal-body a[href='/login']")
+	//private By descriptionTextarea = By.cssSelector("#ordermsg textarea")
+	
+	CartPage verifySelectedProductInCart (String selectedProductName) {
+		verifyVisible(productNames)
+		def productNamesInCart = finds(productNames).collect { it.getText() }
+		assert productNamesInCart.contains(selectedProductName)
+		return this
+		
+	}
+	CartPage verifyCartPageVisible() {
+		verifyVisible(breadcrumbShoppingCart)
+		assert getText(breadcrumbShoppingCart) == "Shopping Cart"
 		return this
 	}
-	CheckoutPage verifyReviewOrderTitle() {
-		verifyVisible(reviewOrderTitle)
-		return this
+	CheckoutPage clickOnCheckout () {
+		click(checkoutButton)
+		return new CheckoutPage()
 	}
-	CheckoutPage setDescriptionOrder (String description) {
-		setText(descriptionOrder, description)
-		return this
+	LoginPage clickOnRegisterLoginInModal() {
+		click(registerLoginButtonInModal)
+		return new LoginPage()
 	}
-	PaymentPage clickOnPlaceOrder () {
-		click(placeOrderButton)
-		return new PaymentPage()
-	}
-
+	
 
 }

@@ -99,4 +99,15 @@ public class BasePage {
 				[find(locator)]
 				)
 	}
+	void waitForUrlContains(String value) {
+
+		WebDriverWait wait = new WebDriverWait(
+				driver,
+				Duration.ofSeconds(DEFAULT_TIMEOUT)
+				)
+
+		wait.until(
+				ExpectedConditions.urlContains(value)
+				)
+	}
 }

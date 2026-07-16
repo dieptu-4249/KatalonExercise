@@ -28,6 +28,7 @@ public class ProductPage extends BasePage{
 	private By searchProductInput = By.cssSelector("input[id='search_product']")
 	private By searchSubmitButton = By.cssSelector("button[id='submit_search']")
 	private By productCard = By.cssSelector("div[class='productinfo text-center'] p")
+	private By continueShoppingButton = By.cssSelector("div.modal-confirm button.close-modal")
 	ProductPage verifyAllProductsPageVisible(String allProductsTitle) {
 		verifyVisible(searchProductInput)
 		assert getText(productsTitle).equals(allProductsTitle)
@@ -52,6 +53,10 @@ public class ProductPage extends BasePage{
 		productNames.each {  name ->
 			assert name.toLowerCase().contains(searchKeyword)
 		}
+		return this
+	}
+	ProductPage clickOnContinueShopping () {
+		clickOnContinueShopping()
 		return this
 	}
 }

@@ -23,27 +23,15 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import common.BasePage
 import internal.GlobalVariable
 
-public class CheckoutPage extends BasePage {
-	private By addressDetailsTitle = By.xpath("//div/h2[contains(.,'Address Details')]") 
-	private By reviewOrderTitle = By.xpath("//div/h2[contains(.,'Review Your Order')]")
-	private By descriptionOrder = By.cssSelector("textarea[name='message']")
-	private By placeOrderButton = By.cssSelector("a[href='/payment']")
-	CheckoutPage verifyAddressDetailsTitleVisible() {
-		verifyVisible(addressDetailsTitle)
+public class AccountCreatedPage extends BasePage {
+	private By accountCreatedTitle = By.cssSelector("h2[data-qa='account-created'] b")
+	private By continueButton = By.cssSelector("a[data-qa='continue-button']")
+	AccountCreatedPage verifyAccountCreatedPageVisible() {
+		verifyVisible(accountCreatedTitle)
 		return this
 	}
-	CheckoutPage verifyReviewOrderTitle() {
-		verifyVisible(reviewOrderTitle)
-		return this
+	HomePage clickOnContinueButton () {
+		click(continueButton)
+		return new HomePage()
 	}
-	CheckoutPage setDescriptionOrder (String description) {
-		setText(descriptionOrder, description)
-		return this
-	}
-	PaymentPage clickOnPlaceOrder () {
-		click(placeOrderButton)
-		return new PaymentPage()
-	}
-
-
 }
