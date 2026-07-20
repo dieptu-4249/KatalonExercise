@@ -28,22 +28,25 @@ public class CheckoutPage extends BasePage {
 	private By reviewOrderTitle = By.xpath("//div/h2[contains(.,'Review Your Order')]")
 	private By descriptionOrder = By.cssSelector("textarea[name='message']")
 	private By placeOrderButton = By.cssSelector("a[href='/payment']")
+
 	CheckoutPage verifyAddressDetailsTitleVisible() {
 		verifyVisible(addressDetailsTitle)
 		return this
 	}
+
 	CheckoutPage verifyReviewOrderTitle() {
 		verifyVisible(reviewOrderTitle)
 		return this
 	}
+
 	CheckoutPage setDescriptionOrder (String description) {
 		setText(descriptionOrder, description)
 		return this
 	}
+
 	PaymentPage clickOnPlaceOrder () {
 		click(placeOrderButton)
 		return new PaymentPage()
 	}
-
 
 }

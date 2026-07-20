@@ -25,29 +25,42 @@ import internal.GlobalVariable
 
 public class ProductPage extends BasePage{
 	private By productsTitle = By.cssSelector("h2.title")
+	private String productListName = "ALL PRODUCTS"
+	private String searchedProductListName = "SEARCHED PRODUCTS"
 	private By searchProductInput = By.cssSelector("input[id='search_product']")
 	private By searchSubmitButton = By.cssSelector("button[id='submit_search']")
 	private By productCard = By.cssSelector("div[class='productinfo text-center'] p")
 	private By continueShoppingButton = By.cssSelector("div.modal-confirm button.close-modal")
-	ProductPage verifyAllProductsPageVisible(String allProductsTitle) {
+	private String searchKeyword = "little"
+	
+	ProductPage verifyProductListNameVisible() {
 		verifyVisible(searchProductInput)
-		assert getText(productsTitle).equals(allProductsTitle)
-		return this
-	}
-	ProductPage verifySearchedProductsPageVisible(String searchedProductsTitle) {
-		assert getText(productsTitle).equals(searchedProductsTitle)
+		assert getText(productsTitle).equals(productListName)
 		return this
 	}
 
-	ProductPage setSearchInput(String searchKeyword) {
+	ProductPage verifySearchedProductListNameVisible() {
+		assert getText(productsTitle).equals(searchedProductListName)
+		return this
+	}
+
+	ProductPage enterSearchKeywords() {
 		setText(searchProductInput, searchKeyword)
 		return this
 	}
+
 	ProductPage clickOnSearchSubmitButton() {
 		click(searchSubmitButton)
 		return this
 	}
-	ProductPage verifySearchedProducts(String searchKeyword) {
+
+	ProductPage searchProducts () {
+		enterSearchKeywords()
+		clickOnSearchSubmitButton()
+		return this
+	}
+
+	ProductPage verifySearchedProducts() {
 		searchKeyword = searchKeyword.toLowerCase()
 		List<String> productNames = driver.findElements(productCard).collect { it.getText() }
 		productNames.each {  name ->
@@ -55,8 +68,10 @@ public class ProductPage extends BasePage{
 		}
 		return this
 	}
+
 	ProductPage clickOnContinueShopping () {
 		clickOnContinueShopping()
 		return this
 	}
+
 }

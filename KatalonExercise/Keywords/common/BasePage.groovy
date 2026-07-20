@@ -39,6 +39,7 @@ public class BasePage {
 	WebElement find(By locator) {
 		return driver.findElement(locator)
 	}
+
 	List<WebElement> finds (By locator){
 		return driver.findElements(locator)
 	}
@@ -68,22 +69,16 @@ public class BasePage {
 	}
 
 	void setText(By locator, String text) {
-
 		waitVisible(locator)
-
 		WebElement element = find(locator)
-
 		element.clear()
 		element.sendKeys(text)
 	}
 
 	String getText(By locator) {
-
 		waitVisible(locator)
-
 		return find(locator).getText()
 	}
-
 
 	void verifyVisible(By locator) {
 		assert isDisplayed(locator)
@@ -92,22 +87,14 @@ public class BasePage {
 	void verifyTitle (String expectedTitle) {
 		assert driver.getTitle().equals(expectedTitle)
 	}
+
 	void scrollToElement(By locator) {
-
-		WebUI.executeJavaScript(
-				"arguments[0].scrollIntoView({block:'center'});",
-				[find(locator)]
-				)
+		WebUI.executeJavaScript("arguments[0].scrollIntoView({block:'center'});",[find(locator)]				)
 	}
+
 	void waitForUrlContains(String value) {
-
-		WebDriverWait wait = new WebDriverWait(
-				driver,
-				Duration.ofSeconds(DEFAULT_TIMEOUT)
-				)
-
-		wait.until(
-				ExpectedConditions.urlContains(value)
-				)
+		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(DEFAULT_TIMEOUT))
+		wait.until(ExpectedConditions.urlContains(value)				)
 	}
+
 }

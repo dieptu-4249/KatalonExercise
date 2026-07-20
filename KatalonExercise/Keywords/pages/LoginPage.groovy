@@ -30,42 +30,51 @@ public class LoginPage extends BasePage {
 	private By loginEmailInput = By.cssSelector("input[data-qa='login-email']")
 	private By loginPasswordInput = By.cssSelector("input[data-qa='login-password']")
 	private By loginBtn = By.cssSelector("button[data-qa='login-button']")
-	private By errorMessage = By.cssSelector("form[action='/login'] p")
+	private By errorMessageAlert = By.cssSelector("form[action='/login'] p")
 	private By signupNameInput = By.cssSelector("input[data-qa='signup-name']")
 	private By signupEmailInput = By.cssSelector("input[data-qa='signup-email']")
 	private By signUpButton = By.cssSelector("button[data-qa='signup-button']")
+	private String loginErrorMessage = "Your email or password is incorrect!"
+
 	LoginPage verifyLoginTitle (String expectedTitle) {
 		waitVisible(loginTitle)
 		assert getText(loginTitle).equals(expectedTitle)
 		return this
 	}
-	LoginPage setLoginEmailInput(String email) {
+
+	LoginPage enterLoginEmail(String email) {
 		setText(loginEmailInput, email)
 		return this
 	}
-	LoginPage setLoginPasswordInput (String password) {
+
+	LoginPage enterLoginPassword (String password) {
 		setText(loginPasswordInput, password)
 		return this
 	}
-	LoginPage setSignupNameInput (String name) {
+
+	LoginPage enterSignUpName (String name) {
 		setText(signupNameInput, name)
 		return this
 	}
-	LoginPage setSignupEmailInput (String email) {
+
+	LoginPage enterSignUpEmail (String email) {
 		setText(signupEmailInput, email)
 		return this
 	}
+
 	LoginPage clickOnLoginButton () {
 		click(loginBtn)
 		return this
 	}
+
 	SignUpPage clickOnSignupButton () {
 		click(signUpButton)
 		return new SignUpPage()
 	}
-	LoginPage verifyErrorMessage(String expectedMessage) {
-		assert getText(errorMessage).equals(expectedMessage)
+
+	LoginPage verifyErrorMessage() {
+		assert getText(errorMessageAlert).equals(loginErrorMessage)
 		return this
 	}
-	
+
 }

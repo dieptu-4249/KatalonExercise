@@ -31,39 +31,45 @@ public class PaymentPage extends BasePage {
 	private By expireYearInput = By.cssSelector("input[data-qa='expiry-year']")
 	private By payAndConfirmButton = By.cssSelector("button#submit")
 	private By alertSuccessMessage = By.cssSelector("form div.alert-success")
+
 	PaymentPage setCardNameInput (String cardName) {
 		setText(cardNameInput, cardName)
 		return this
 	}
+
 	PaymentPage setCardNumberInput (String cardNumber) {
 		setText(cardNumberInput, cardNumber)
 		return this
 	}
+
 	PaymentPage setCvcInput (String cvc) {
 		setText(cvcInput, cvc)
 		return this
 	}
+
 	PaymentPage setExpireMonthInput (String month) {
 		setText(expireMonthInput, month)
 		return this
 	}
+
 	PaymentPage setExpireYearInput (String year) {
 		setText(expireYearInput, year)
 		return this
 	}
+
 	PaymentPage clickOnPayAndConfirmButton() {
 		click(payAndConfirmButton)
 		return this
 	}
+
 	PaymentPage verifyOrderPlacedSuccessfully() {
 		verifyVisible(alertSuccessMessage)
 		return this
 	}
+
 	OrderPlacedPage waitForRedirectToOrderPlacedPage() {
-		
-			waitForUrlContains("/payment_done")
-		
-			return new OrderPlacedPage()
-		}
-	
+		waitForUrlContains("/payment_done")
+		return new OrderPlacedPage()
+	}
+
 }

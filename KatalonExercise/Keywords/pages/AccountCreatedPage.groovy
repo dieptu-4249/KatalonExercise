@@ -26,12 +26,15 @@ import internal.GlobalVariable
 public class AccountCreatedPage extends BasePage {
 	private By accountCreatedTitle = By.cssSelector("h2[data-qa='account-created'] b")
 	private By continueButton = By.cssSelector("a[data-qa='continue-button']")
+	
 	AccountCreatedPage verifyAccountCreatedPageVisible() {
 		verifyVisible(accountCreatedTitle)
 		return this
 	}
+
 	HomePage clickOnContinueButton () {
 		click(continueButton)
 		return new HomePage()
 	}
+
 }

@@ -36,28 +36,34 @@ public class HomePage extends BasePage {
 	private By cartButton = By.cssSelector("li a[href='/view_cart']")
 	private By continueShoppingButton = By.cssSelector("div.modal-confirm button.close-modal")
 	private By loggedInfo = By.xpath("//li/a[contains(.,'Logged in as')]")
+	private By deletedAccountButton = By.xpath("//li/a[contains(.,'Delete Account')]")
 	private String selectedRecommendedProductName = ""
 
 	String getSelectedRecommendedProductName () {
 		return this.selectedRecommendedProductName
 	}
+
 	HomePage open () {
 		goToUrl("http://automationexercise.com")
 		return this
 	}
-	HomePage verifyHomePageVisible () {
+
+	HomePage verifyVisible () {
 		verifyVisible(slider)
 		return this
 	}
+
 	HomePage scrollToRecommendedTitle() {
 		scrollToElement(recommendedTitle)
 		return this
 	}
+
 	HomePage verifyRecommendedTitleVisible() {
 		verifyVisible(recommendedTitle)
 		return this
 	}
-	HomePage clickOnRandomRecommendedItem() {
+
+	HomePage addRandomRecommendedItemToCart() {
 		def products = finds(recommendedProducts)
 		def randomIndex = new Random().nextInt(products.size())
 		def selectedProduct = products[randomIndex]
@@ -65,6 +71,7 @@ public class HomePage extends BasePage {
 		selectedProduct.findElement(By.cssSelector("a.add-to-cart")).click()
 		return this
 	}
+
 	HomePage clickOnRandomFeatureItems(int numberOfItem) {
 		def products = finds(featureProducts)
 		for(int i=0; i<numberOfItem;i++) {
@@ -75,15 +82,21 @@ public class HomePage extends BasePage {
 		}
 		return this;
 	}
+
 	HomePage clickOnContinueShopping() {
 		click(continueShoppingButton)
 		return this
 	}
+
+	AccountDeletedPage clickOnDeleteAccount () {
+		click(deletedAccountButton)
+		return new AccountDeletedPage()
+	}
+
 	CartPage clickOnCartButton () {
 		click(cartButton)
 		return new CartPage()
 	}
-
 
 	CartPage clickOnViewCart() {
 		click(viewCartButton)
@@ -94,17 +107,21 @@ public class HomePage extends BasePage {
 		click(btnSignUpLogin)
 		return new LoginPage()
 	}
+
 	TestCasesPage clickOnTestCases() {
 		click(testCasesButton)
 		return new TestCasesPage()
 	}
+
 	ProductPage clickOnProduct() {
 		println(driver.getCurrentUrl())
 		click(productButton)
 		return new ProductPage()
 	}
+
 	HomePage verifyLoggedInfoVisible () {
 		verifyVisible(loggedInfo)
 		return this
 	}
+
 }

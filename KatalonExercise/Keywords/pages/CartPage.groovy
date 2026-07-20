@@ -28,28 +28,28 @@ public class CartPage extends BasePage {
 	private By breadcrumbShoppingCart = By.cssSelector("div.breadcrumbs li.active")
 	private By checkoutButton = By.cssSelector("a.check_out")
 	private By registerLoginButtonInModal = By.cssSelector("div.modal-body a[href='/login']")
-	//private By descriptionTextarea = By.cssSelector("#ordermsg textarea")
-	
+
 	CartPage verifySelectedProductInCart (String selectedProductName) {
 		verifyVisible(productNames)
 		def productNamesInCart = finds(productNames).collect { it.getText() }
 		assert productNamesInCart.contains(selectedProductName)
 		return this
-		
 	}
+
 	CartPage verifyCartPageVisible() {
 		verifyVisible(breadcrumbShoppingCart)
 		assert getText(breadcrumbShoppingCart) == "Shopping Cart"
 		return this
 	}
+
 	CheckoutPage clickOnCheckout () {
 		click(checkoutButton)
 		return new CheckoutPage()
 	}
+
 	LoginPage clickOnRegisterLoginInModal() {
 		click(registerLoginButtonInModal)
 		return new LoginPage()
 	}
-	
 
 }

@@ -1,3 +1,14 @@
 {
-  "brokenTestObjects" : [ ]
+  "brokenTestObjects": [
+    {
+      "approved": true,
+      "testObjectId": "Object Repository/Page_Automation Exercise - Payment/div_Your order has been placed successfully",
+      "brokenLocator": "//*[@id \u003d \u0027success_message\u0027]//*[@class and contains(concat(\u0027 \u0027, normalize-space(@class), \u0027 \u0027), \u0027 alert-success \u0027)]",
+      "brokenLocatorMethod": "XPATH",
+      "proposedLocator": "//section[@id\u003d\u0027form\u0027]/div/div/div/h2",
+      "proposedLocatorMethod": "XPATH",
+      "recoveryMethod": "XPATH",
+      "pathToScreenshot": "Reports/Self-healing/Object Repository/Page_Automation Exercise - Payment/div_Your order has been placed successfully_XPATH.png"
+    }
+  ]
 }

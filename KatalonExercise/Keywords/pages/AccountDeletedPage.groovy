@@ -6,7 +6,6 @@ import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 
-import org.apache.ivy.core.module.descriptor.ExtendsDescriptor
 import org.openqa.selenium.By
 
 import com.kms.katalon.core.annotation.Keyword
@@ -24,12 +23,20 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import common.BasePage
 import internal.GlobalVariable
 
-public class TestCasesPage extends BasePage {
-	private By testCaseTitle = By.cssSelector("h2.title")
+public class AccountDeletedPage extends BasePage{
+	private By accountDeletedName = By.cssSelector("h2 b")
+	private String deletedName = "ACCOUNT DELETED!"
+	private By continueButton = By.cssSelector("a[data-qa='continue-button']")
 	
-	TestCasesPage verifyVisible () {
-		verifyVisible(testCaseTitle)
-		return this
+	AccountDeletedPage verifyAccountDeletedName () {
+		verifyVisible(accountDeletedName)
+		assert getText(accountDeletedName).equals(deletedName)
 	}
+
+	HomePage clickOnContinueButton () {
+		click(continueButton)
+		return new HomePage()
+	}
+
 
 }
