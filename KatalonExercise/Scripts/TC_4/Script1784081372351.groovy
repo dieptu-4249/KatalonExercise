@@ -3,7 +3,7 @@ import pages.CartPage
 import pages.HomePage
 
 //1. Launch browser
-WebUI.openBrowser("")
+WebUI.openBrowser('')
 
 //2. Navigate to url 'http://automationexercise.com'
 HomePage homePage = new HomePage()

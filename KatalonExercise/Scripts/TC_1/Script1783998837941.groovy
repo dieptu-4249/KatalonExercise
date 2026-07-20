@@ -26,6 +26,6 @@ loginPage.enterLoginPassword('1234')
 loginPage.clickOnLoginButton()
 
 //8. Verify error 'Your email or password is incorrect!' is visible
-loginPage.verifyErrorMessage('')
+loginPage.verifyErrorMessage()
 WebUI.closeBrowser()
 

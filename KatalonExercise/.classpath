@@ -318,6 +318,7 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/dieptu/.katalon/packages/KS-11.3.0/plugins/org.testng_7.8.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/dieptu/.katalon/packages/KS-11.3.0/plugins/com.beust.jcommander_1.82.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dieptu/.katalon/packages/KS-11.3.0/configuration/plugin/install/253217/5.1.0/katalon-testcloud-keywords-plugin-all-30122025-openBrowser-newHub.jar"/>
 	<classpathentry kind="con" path="GROOVY_SUPPORT"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
